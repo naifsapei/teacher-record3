@@ -1,0 +1,135 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "description": "\u062f\u0648\u0631 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0641\u064a \u0627\u0644\u0645\u0646\u0635\u0629 (\u0645\u062f\u064a\u0631 \u0646\u0638\u0627\u0645/\u0645\u0633\u062a\u062e\u062f\u0645)",
+      "enum": [
+        "admin",
+        "user"
+      ]
+    },
+    "account_type": {
+      "type": "string",
+      "description": "\u0646\u0648\u0639 \u0627\u0644\u062d\u0633\u0627\u0628: \u0645\u062c\u0627\u0646\u064a \u0623\u0648 \u0645\u0634\u062a\u0631\u0643 (\u064a\u062a\u062d\u0643\u0645 \u0641\u064a \u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u062a\u0635\u062f\u064a\u0631)",
+      "enum": [
+        "free",
+        "subscriber",
+        "guest"
+      ],
+      "default": "free"
+    },
+    "app_role": {
+      "type": "string",
+      "description": "\u062f\u0648\u0631 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0641\u064a \u0627\u0644\u062a\u0637\u0628\u064a\u0642: \u0645\u0639\u0644\u0645\u060c \u0645\u062f\u064a\u0631 \u0645\u062f\u0631\u0633\u0629\u060c \u0648\u0643\u064a\u0644 \u0634\u0624\u0648\u0646 \u0627\u0644\u0637\u0644\u0627\u0628\u060c \u0645\u0648\u062c\u0647 \u0637\u0644\u0627\u0628\u064a\u060c \u0648\u0643\u064a\u0644 \u0634\u0624\u0648\u0646 \u0627\u0644\u0645\u0639\u0644\u0645\u064a\u0646",
+      "enum": [
+        "teacher",
+        "principal",
+        "student_affairs",
+        "student_counselor",
+        "teacher_affairs"
+      ]
+    },
+    "school_id": {
+      "type": "string",
+      "description": "\u0645\u064f\u0639\u0631\u0650\u0651\u0641 \u0627\u0644\u0645\u062f\u0631\u0633\u0629 \u0627\u0644\u0645\u0631\u062a\u0628\u0637\u0629 (SchoolInfo id) \u2014 \u0627\u0644\u0631\u0628\u0637 \u0627\u0644\u062f\u0627\u062e\u0644\u064a \u0627\u0644\u062b\u0627\u0628\u062a \u0627\u0644\u0645\u064f\u062a\u062d\u0642\u064e\u0651\u0642 \u0645\u0646\u0647"
+    },
+    "link_status": {
+      "type": "string",
+      "description": "\u062d\u0627\u0644\u0629 \u0627\u0644\u0631\u0628\u0637 \u0628\u0627\u0644\u0645\u062f\u0631\u0633\u0629: approved=\u062a\u0645\u062a \u0627\u0644\u0645\u0648\u0627\u0641\u0642\u0629\u060c pending=\u0628\u0627\u0646\u062a\u0638\u0627\u0631 \u0645\u0648\u0627\u0641\u0642\u0629 \u0627\u0644\u0645\u062f\u064a\u0631\u060c rejected=\u0645\u0631\u0641\u0648\u0636\u060c independent=\u0645\u0639\u0644\u0645 \u0645\u0633\u062a\u0642\u0644\u060c unlinked=\u063a\u064a\u0631 \u0645\u0631\u062a\u0628\u0637\u060c suspended=\u0645\u0648\u0642\u0648\u0641\u060c invalid_ministry=\u0631\u0642\u0645 \u0648\u0632\u0627\u0631\u064a \u063a\u064a\u0631 \u0635\u062d\u064a\u062d\u060c needs_review=\u064a\u062d\u062a\u0627\u062c \u0645\u0631\u0627\u062c\u0639\u0629",
+      "enum": [
+        "approved",
+        "pending",
+        "rejected",
+        "independent",
+        "unlinked",
+        "suspended",
+        "invalid_ministry",
+        "needs_review"
+      ]
+    },
+    "ministry_number": {
+      "type": "string",
+      "description": "\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0648\u0632\u0627\u0631\u064a \u0644\u0644\u0645\u062f\u0631\u0633\u0629 \u2014 \u0645\u064f\u0632\u0627\u0645\u064e\u0646 \u0645\u0646 SchoolInfo \u0648\u064a\u064f\u0633\u062a\u062e\u062f\u0645 \u0644\u0646\u0637\u0627\u0642 \u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u0643\u064a\u0627\u0646\u0627\u062a"
+    },
+    "phone": {
+      "type": "string",
+      "description": "\u0631\u0642\u0645 \u0627\u0644\u062c\u0648\u0627\u0644 \u0644\u0644\u0645\u0639\u0644\u0645 (\u064a\u0631\u062a\u0628\u0637 \u0628\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u062d\u0633\u0627\u0628)"
+    },
+    "school_name": {
+      "type": "string",
+      "description": "\u0627\u0633\u0645 \u0627\u0644\u0645\u062f\u0631\u0633\u0629 \u0627\u0644\u0645\u0631\u062a\u0628\u0637\u0629 \u0628\u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 (\u0645\u064f\u0632\u0627\u0645\u064e\u0646 \u0645\u0646 SchoolInfo)"
+    },
+    "education_admin": {
+      "type": "string",
+      "description": "\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u062a\u0639\u0644\u064a\u0645 \u0627\u0644\u062a\u0627\u0628\u0639\u0629 \u0644\u0647\u0627 \u0627\u0644\u0645\u062f\u0631\u0633\u0629"
+    },
+    "principal_name": {
+      "type": "string",
+      "description": "\u0627\u0633\u0645 \u0645\u062f\u064a\u0631 \u0627\u0644\u0645\u062f\u0631\u0633\u0629 \u0627\u0644\u0641\u0639\u0644\u064a"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0645\u0639\u0631\u0648\u0636 \u0644\u0644\u0645\u0633\u062a\u062e\u062f\u0645"
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ],
+      "description": "\u0627\u0644\u062c\u0646\u0633 (\u0628\u0646\u064a\u0646/\u0628\u0646\u0627\u062a)"
+    },
+    "specialization": {
+      "type": "string",
+      "description": "\u062a\u062e\u0635\u0635 \u0627\u0644\u0645\u0639\u0644\u0645 (\u0627\u0644\u0645\u0627\u062f\u0629 \u0627\u0644\u062a\u064a \u064a\u062f\u0631\u0633\u0647\u0627)"
+    },
+    "title": {
+      "type": "string",
+      "description": "\u0627\u0644\u0645\u0633\u0645\u0649 \u0627\u0644\u0648\u0638\u064a\u0641\u064a (\u0645\u0639\u0644\u0645/\u0645\u0639\u0644\u0645\u0629\u060c \u0645\u062f\u064a\u0631/\u0645\u062f\u064a\u0631\u0629\u060c \u0648\u0643\u064a\u0644/\u0648\u0643\u064a\u0644\u0629...)"
+    },
+    "subscription_plan": {
+      "type": "string",
+      "description": "\u062e\u0637\u0629 \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643 \u0627\u0644\u062d\u0627\u0644\u064a\u0629",
+      "enum": [
+        "free",
+        "semester",
+        "year",
+        "admin"
+      ],
+      "default": "free"
+    },
+    "subscription_start": {
+      "type": "string",
+      "format": "date",
+      "description": "\u062a\u0627\u0631\u064a\u062e \u0628\u062f\u0627\u064a\u0629 \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643"
+    },
+    "subscription_end": {
+      "type": "string",
+      "format": "date",
+      "description": "\u062a\u0627\u0631\u064a\u062e \u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643"
+    },
+    "subscription_status": {
+      "type": "string",
+      "description": "\u062d\u0627\u0644\u0629 \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643 \u0627\u0644\u0645\u062e\u0632\u0651\u0646\u0629",
+      "enum": [
+        "free",
+        "pending",
+        "active",
+        "expired",
+        "rejected",
+        "admin"
+      ],
+      "default": "free"
+    },
+    "onboarding_completed": {
+      "type": "boolean",
+      "description": "\u0647\u0644 \u0623\u0643\u0645\u0644 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0625\u0631\u0634\u0627\u062f \u0627\u0644\u062a\u0631\u062d\u064a\u0628\u064a \u0639\u0646\u062f \u0623\u0648\u0644 \u062f\u062e\u0648\u0644",
+      "default": false
+    }
+  },
+  "required": [
+    "role"
+  ]
+}

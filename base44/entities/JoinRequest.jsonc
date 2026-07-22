@@ -1,0 +1,144 @@
+{
+  "name": "JoinRequest",
+  "type": "object",
+  "properties": {
+    "requestor_id": {
+      "type": "string",
+      "description": "\u0645\u0639\u0631\u0651\u0641 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0637\u0627\u0644\u0628 \u0627\u0644\u0627\u0646\u0636\u0645\u0627\u0645"
+    },
+    "requestor_name": {
+      "type": "string",
+      "description": "\u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0637\u0627\u0644\u0628 \u0627\u0644\u0627\u0646\u0636\u0645\u0627\u0645"
+    },
+    "requestor_email": {
+      "type": "string",
+      "description": "\u0628\u0631\u064a\u062f \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0637\u0627\u0644\u0628 \u0627\u0644\u0627\u0646\u0636\u0645\u0627\u0645"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "teacher",
+        "student_affairs",
+        "teacher_affairs",
+        "student_counselor"
+      ],
+      "description": "\u0627\u0644\u062f\u0648\u0631 \u0627\u0644\u0645\u0637\u0644\u0648\u0628"
+    },
+    "school_id": {
+      "type": "string",
+      "description": "\u0645\u064f\u0639\u0631\u0650\u0651\u0641 \u0627\u0644\u0645\u062f\u0631\u0633\u0629 \u0627\u0644\u0645\u0631\u0627\u062f \u0627\u0644\u0627\u0646\u0636\u0645\u0627\u0645 \u0625\u0644\u064a\u0647\u0627 (SchoolInfo id)"
+    },
+    "ministry_number": {
+      "type": "string",
+      "description": "\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0648\u0632\u0627\u0631\u064a \u0644\u0644\u0645\u062f\u0631\u0633\u0629 \u0627\u0644\u0645\u0631\u0627\u062f \u0627\u0644\u0627\u0646\u0636\u0645\u0627\u0645 \u0625\u0644\u064a\u0647\u0627"
+    },
+    "school_name": {
+      "type": "string",
+      "description": "\u0627\u0633\u0645 \u0627\u0644\u0645\u062f\u0631\u0633\u0629"
+    },
+    "principal_name": {
+      "type": "string",
+      "description": "\u0627\u0633\u0645 \u0645\u062f\u064a\u0631 \u0627\u0644\u0645\u062f\u0631\u0633\u0629"
+    },
+    "education_admin": {
+      "type": "string",
+      "description": "\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u062a\u0639\u0644\u064a\u0645"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0638\u0627\u0647\u0631"
+    },
+    "phone": {
+      "type": "string",
+      "description": "\u0631\u0642\u0645 \u0627\u0644\u062c\u0648\u0627\u0644"
+    },
+    "specialization": {
+      "type": "string",
+      "description": "\u0627\u0644\u062a\u062e\u0635\u0635 (\u0644\u0644\u0645\u0639\u0644\u0645)"
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ],
+      "description": "\u0627\u0644\u062c\u0646\u0633"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
+      "default": "pending",
+      "description": "\u062d\u0627\u0644\u0629 \u0627\u0644\u0637\u0644\u0628"
+    },
+    "reviewed_by_id": {
+      "type": "string",
+      "description": "\u0645\u0639\u0631\u0651\u0641 \u0627\u0644\u0645\u0631\u0627\u062c\u0639 (\u0627\u0644\u0645\u062f\u064a\u0631/\u0627\u0644\u0623\u062f\u0645\u0646)"
+    },
+    "reviewed_by_name": {
+      "type": "string",
+      "description": "\u0627\u0633\u0645 \u0627\u0644\u0645\u0631\u0627\u062c\u0639"
+    },
+    "reviewed_date": {
+      "type": "string",
+      "description": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0645\u0631\u0627\u062c\u0639\u0629"
+    }
+  },
+  "required": [
+    "requestor_id",
+    "role",
+    "ministry_number",
+    "status"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "principal"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

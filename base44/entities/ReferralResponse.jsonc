@@ -1,0 +1,124 @@
+{
+  "name": "ReferralResponse",
+  "type": "object",
+  "properties": {
+    "referral_id": {
+      "type": "string",
+      "description": "\u0645\u064f\u0639\u0631\u0650\u0651\u0641 \u0627\u0644\u0625\u062d\u0627\u0644\u0629 \u0627\u0644\u0645\u0631\u062a\u0628\u0637\u0629"
+    },
+    "teacher_id": {
+      "type": "string",
+      "description": "\u0645\u064f\u0639\u0631\u0650\u0651\u0641 \u0627\u0644\u0645\u0639\u0644\u0645 \u0645\u0646\u0634\u0626 \u0627\u0644\u0625\u062d\u0627\u0644\u0629"
+    },
+    "author_id": {
+      "type": "string",
+      "description": "\u0645\u064f\u0639\u0631\u0650\u0651\u0641 \u0643\u0627\u062a\u0628 \u0627\u0644\u0631\u062f"
+    },
+    "author_name": {
+      "type": "string",
+      "description": "\u0627\u0633\u0645 \u0643\u0627\u062a\u0628 \u0627\u0644\u0631\u062f"
+    },
+    "author_role": {
+      "type": "string",
+      "description": "\u062f\u0648\u0631 \u0643\u0627\u062a\u0628 \u0627\u0644\u0631\u062f"
+    },
+    "directives": {
+      "type": "string",
+      "description": "\u0627\u0644\u062a\u0648\u062c\u064a\u0647\u0627\u062a"
+    },
+    "actions_taken": {
+      "type": "string",
+      "description": "\u0627\u0644\u0625\u062c\u0631\u0627\u0621\u0627\u062a \u0627\u0644\u0645\u062a\u062e\u0630\u0629"
+    },
+    "notes": {
+      "type": "string",
+      "description": "\u0627\u0644\u0645\u0644\u0627\u062d\u0638\u0627\u062a"
+    },
+    "recommendations": {
+      "type": "string",
+      "description": "\u0627\u0644\u062a\u0648\u0635\u064a\u0627\u062a"
+    },
+    "new_status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "in_review",
+        "resolved",
+        "closed"
+      ],
+      "description": "\u0627\u0644\u062d\u0627\u0644\u0629 \u0627\u0644\u062c\u062f\u064a\u062f\u0629 \u0644\u0644\u0625\u062d\u0627\u0644\u0629 \u0628\u0639\u062f \u0627\u0644\u0631\u062f"
+    },
+    "ministry_number": {
+      "type": "string",
+      "description": "\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0648\u0632\u0627\u0631\u064a \u0644\u0644\u0645\u062f\u0631\u0633\u0629"
+    }
+  },
+  "required": [
+    "referral_id",
+    "teacher_id",
+    "author_id",
+    "author_name"
+  ],
+  "rls": {
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.teacher_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "principal"
+              }
+            }
+          ]
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "student_counselor"
+              }
+            }
+          ]
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "student_affairs"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

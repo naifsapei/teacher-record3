@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-arabic: 'Noto Kufi Arabic', sans-serif;
+    --background: 0 0% 100%;
+    --foreground: 215 68% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 68% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 68% 14%;
+    --primary: 210 100% 20%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 215 60% 20%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 12% 45%;
+    --accent: 147 100% 34%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
+    --ring: 210 100% 20%;
+    --chart-1: 210 100% 20%;
+    --chart-2: 147 100% 34%;
+    --chart-3: 200 70% 45%;
+    --chart-4: 147 55% 50%;
+    --chart-5: 0 72% 51%;
+    --radius: 0.875rem;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215 68% 16%;
+    --sidebar-primary: 210 100% 20%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 20% 96%;
+    --sidebar-accent-foreground: 210 100% 20%;
+    --sidebar-border: 220 14% 90%;
+    --sidebar-ring: 210 100% 20%;
+  }
+
+  .dark {
+    --background: 215 40% 8%;
+    --foreground: 210 20% 95%;
+    --card: 215 35% 12%;
+    --card-foreground: 210 20% 95%;
+    --popover: 215 35% 12%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 210 80% 48%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 210 20% 90%;
+    --muted: 215 25% 16%;
+    --muted-foreground: 215 20% 72%;
+    --accent: 147 70% 42%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 25% 20%;
+    --input: 215 25% 20%;
+    --ring: 210 80% 48%;
+    --chart-1: 210 80% 48%;
+    --chart-2: 147 70% 42%;
+    --chart-3: 200 65% 55%;
+    --chart-4: 147 50% 55%;
+    --chart-5: 0 62% 52%;
+    --sidebar-background: 215 38% 10%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 210 80% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 25% 16%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 215 25% 20%;
+    --sidebar-ring: 210 80% 48%;
+  }
+}
+
+@layer components {
+  .sidebar-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .sidebar-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .sidebar-scroll::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+  .sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-arabic;
+    overscroll-behavior-y: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  input, textarea, select, [contenteditable="true"] {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  input[type="checkbox"] {
+    accent-color: hsl(var(--primary));
+    cursor: pointer;
+    flex-shrink: 0;
+    direction: rtl;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+  body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-size: 11px !important;
+  }
+  .print-table {
+    table-layout: fixed !important;
+    width: 100% !important;
+    font-size: 10px !important;
+  }
+  .print-table th,
+  .print-table td {
+    padding: 3px 5px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

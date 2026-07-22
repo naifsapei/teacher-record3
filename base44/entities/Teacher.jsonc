@@ -1,0 +1,134 @@
+{
+  "name": "Teacher",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "\u0627\u0633\u0645 \u0627\u0644\u0645\u0639\u0644\u0645"
+    },
+    "phone": {
+      "type": "string",
+      "description": "\u0631\u0642\u0645 \u0627\u0644\u062c\u0648\u0627\u0644"
+    },
+    "email": {
+      "type": "string",
+      "description": "\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a"
+    },
+    "ministry_number": {
+      "type": "string",
+      "description": "\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0648\u0632\u0627\u0631\u064a \u0644\u0644\u0645\u062f\u0631\u0633\u0629 \u0627\u0644\u0645\u0631\u062a\u0628\u0637 \u0628\u0627\u0644\u0645\u0639\u0644\u0645 (\u0645\u0641\u062a\u0627\u062d \u0627\u0644\u0631\u0628\u0637 \u0628\u0627\u0644\u0645\u062f\u064a\u0631)"
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ],
+      "description": "\u0646\u0648\u0639 \u0627\u0644\u0645\u062f\u0631\u0633\u0629: \u0628\u0646\u064a\u0646 \u0623\u0648 \u0628\u0646\u0627\u062a"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "\u0645\u0639\u0631\u0641 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0645\u0631\u062a\u0628\u0637 \u0628\u0627\u0644\u0645\u0639\u0644\u0645"
+    },
+    "specialization": {
+      "type": "string",
+      "description": "\u062a\u062e\u0635\u0635 \u0627\u0644\u0645\u0639\u0644\u0645 (\u0627\u0644\u0645\u0627\u062f\u0629 \u0627\u0644\u062a\u064a \u064a\u062f\u0631\u0633\u0647\u0627)"
+    },
+    "grade_level": {
+      "type": "string",
+      "description": "\u0627\u0644\u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u062f\u0631\u0627\u0633\u064a\u0629 (\u0645\u062b\u0627\u0644: \u0627\u0628\u062a\u062f\u0627\u0626\u064a\u060c \u0645\u062a\u0648\u0633\u0637\u060c \u062b\u0627\u0646\u0648\u064a)"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "principal"
+              }
+            }
+          ]
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "student_affairs"
+              }
+            }
+          ]
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "student_counselor"
+              }
+            }
+          ]
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "teacher_affairs"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

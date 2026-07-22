@@ -1,0 +1,150 @@
+{
+  "name": "EvaluationItem",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "\u0627\u0633\u0645 \u0639\u0646\u0635\u0631 \u0627\u0644\u062a\u0642\u064a\u0645"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "positive",
+        "negative",
+        "achievement",
+        "homework",
+        "participation",
+        "other"
+      ],
+      "default": "positive",
+      "description": "\u0646\u0648\u0639 \u0639\u0646\u0635\u0631 \u0627\u0644\u062a\u0642\u064a\u0645"
+    },
+    "icon_key": {
+      "type": "string",
+      "default": "check",
+      "description": "\u0645\u0641\u062a\u0627\u062d \u0627\u0644\u0623\u064a\u0642\u0648\u0646\u0629 \u0645\u0646 \u062e\u0631\u064a\u0637\u0629 \u0627\u0644\u0623\u064a\u0642\u0648\u0646\u0627\u062a"
+    },
+    "points": {
+      "type": "number",
+      "default": 0,
+      "description": "\u0627\u0644\u0646\u0642\u0627\u0637 \u0627\u0644\u0645\u0645\u0646\u0648\u062d\u0629 (\u064a\u0645\u0643\u0646 \u0623\u0646 \u062a\u0643\u0648\u0646 \u0633\u0644\u0628\u064a\u0629)"
+    },
+    "grade_field": {
+      "type": "string",
+      "enum": [
+        "none",
+        "participation",
+        "homework",
+        "class_activity",
+        "research",
+        "written_exam",
+        "practical_exam"
+      ],
+      "default": "none",
+      "description": "\u0631\u0628\u0637 \u0639\u0646\u0635\u0631 \u0627\u0644\u062a\u0642\u064a\u0645 \u0628\u062a\u0648\u0632\u064a\u0639 \u0627\u0644\u062f\u0631\u062c\u0627\u062a \u0627\u0644\u0645\u0646\u0627\u0633\u0628 \u0644\u0647"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "\u0647\u0644 \u0627\u0644\u0639\u0646\u0635\u0631 \u0645\u0641\u0639\u0651\u0644 \u0644\u0644\u0627\u0633\u062a\u062e\u062f\u0627\u0645"
+    },
+    "ministry_number": {
+      "type": "string",
+      "description": "\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0648\u0632\u0627\u0631\u064a \u0644\u0644\u0645\u062f\u0631\u0633\u0629 (\u0645\u0641\u062a\u0627\u062d \u0627\u0644\u0631\u0628\u0637 \u0628\u064a\u0646 \u062d\u0633\u0627\u0628\u0627\u062a \u0627\u0644\u0645\u062f\u0631\u0633\u0629)"
+    }
+  },
+  "required": [
+    "name",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "created_by_id": "{{user.id}}",
+      "data.ministry_number": "{{user.data.ministry_number}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "principal"
+              }
+            }
+          ]
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "student_affairs"
+              }
+            }
+          ]
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "student_counselor"
+              }
+            }
+          ]
+        },
+        {
+          "$and": [
+            {
+              "data.ministry_number": "{{user.data.ministry_number}}"
+            },
+            {
+              "user_condition": {
+                "data.app_role": "teacher_affairs"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

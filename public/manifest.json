@@ -1,0 +1,27 @@
+{
+  "name": "سجل المعلم",
+  "short_name": "سجل المعلم",
+  "description": "نظام إدارة الصفوف ومتابعة الطلاب والمعلمين",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "dir": "rtl",
+  "lang": "ar",
+  "background_color": "#002060",
+  "theme_color": "#002060",
+  "icons": [
+    {
+      "src": "https://media.base44.com/images/public/6a18d47e827f674eacf047fc/b6948bb9d_Photoroom-20260714_015634.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://media.base44.com/images/public/6a18d47e827f674eacf047fc/b6948bb9d_Photoroom-20260714_015634.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
